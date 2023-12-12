@@ -36,7 +36,7 @@ public class User  implements UserDetails{
 		
 		setUsername(username);
 		setPassword(password);
-		setRoles(getRoles());
+		setRoles(roles);
 	}
 	
 	public int getId() {
@@ -62,6 +62,9 @@ public class User  implements UserDetails{
 	}
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+	public void setRoles(Role... roles) {
+		setRoles(List.of(roles));
 	}
 	
 	@Override

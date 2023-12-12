@@ -1,5 +1,10 @@
 package org.java.spring;
 
+import org.java.spring.auth.conf.AuthConf;
+import org.java.spring.auth.db.pojo.Role;
+import org.java.spring.auth.db.pojo.User;
+import org.java.spring.auth.db.serv.RoleService;
+import org.java.spring.auth.db.serv.UserService;
 import org.java.spring.db.pojo.Ingredient;
 import org.java.spring.db.pojo.Pizza;
 import org.java.spring.db.serv.IngredientService;
@@ -22,6 +27,12 @@ public class Application implements CommandLineRunner{
 	@Autowired
 	private IngredientService ingredientService;
 	
+	@Autowired
+	private RoleService roleService;
+	
+	@Autowired
+	private UserService userService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
@@ -29,6 +40,7 @@ public class Application implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
+		//INGREDIENTS
 		Ingredient i1 = new Ingredient("pomodoro");
 		Ingredient i2 = new Ingredient("mozzarella");
 		Ingredient i3 = new Ingredient("wurstel");
@@ -47,7 +59,7 @@ public class Application implements CommandLineRunner{
 		ingredientService.save(i7);
 		ingredientService.save(i8);
 		
-		
+		//PIZZAS
 		pizzaService.save(new Pizza("Margherita", "mozzarella, pomodoro", "https://upload.wikimedia.org/wikipedia/commons/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg", 8.5f, i1));
 		pizzaService.save(new Pizza("Diavola", "mozzarella, pomodoro, salame piccante", "https://wips.plug.it/cips/buonissimo.org/cms/2012/05/69630013_m.jpg", 8.5f));
 		pizzaService.save(new Pizza("Campagnola", "mozzarella, pomodoro, funghi, prosciutto", "https://it.wikipedia.org/wiki/Pizza_napoletana#/media/File:Eq_it-na_pizza-margherita_sep2005_sml.jpg", 8.5f));
@@ -76,7 +88,24 @@ public class Application implements CommandLineRunner{
 		pizzaService.save(new Pizza("Campagnola", "mozzarella, pomodoro, funghi, prosciutto", "https://it.wikipedia.org/wiki/Pizza_napoletana#/media/File:Eq_it-na_pizza-margherita_sep2005_sml.jpg", 8.5f));
 		pizzaService.save(new Pizza("Campagnola", "mozzarella, pomodoro, funghi, prosciutto", "https://it.wikipedia.org/wiki/Pizza_napoletana#/media/File:Eq_it-na_pizza-margherita_sep2005_sml.jpg", 8.5f));
 		
+		//ROLES
+		Role roleUser = new Role("USER");
+		Role roleAdmin = new Role("ADMIN");
+		Role roleGod = new Role("GOD");
 		
+		roleService.save(roleUser);
+		roleService.save(roleAdmin);
+		roleService.save(roleGod);
+		
+		String psw = AuthConf.passwordEncoder().encode("password");
+		
+		User florianaUser = new User("florianaUser", psw, roleUser);
+		User florianaAdmin = new User("florianaAdmin", psw, roleAdmin);
+		User florianaGod = new User("florianaGod", psw, roleGod);
+		
+		userService.save(florianaUser);
+		userService.save(florianaAdmin);
+		userService.save(florianaGod);
 	}
 
 }
