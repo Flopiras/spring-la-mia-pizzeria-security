@@ -12,9 +12,12 @@
 
 	<div class="container">
 
-		<!--login button-->
 		<div class="d-flex justify-content-end mt-4">
-			<a href="/login" class="btn btn-primary">Login</a>
+			<!--login button-->
+			<a href="/login" class="btn btn-primary" sec:authorize="!isAuthenticated()">Login</a>
+			
+			<!--logout button-->
+			<a href="/logout" class="btn btn-primary" sec:authorize="isAuthenticated()">Logout</a>
 		</div>
 
 		<h1 class="text-center my-4">Pizzeria Lato Oscuro</h1>
