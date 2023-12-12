@@ -12,6 +12,11 @@
 
 	<div class="container">
 
+		<!--login button-->
+		<div class="d-flex justify-content-end mt-4">
+			<a href="/login" class="btn btn-primary">Login</a>
+		</div>
+
 		<h1 class="text-center my-4">Pizzeria Lato Oscuro</h1>
 
 		<div class="d-flex justify-content-around align-items-baseline">
@@ -32,10 +37,12 @@
 			</form>
 
 			<!--create button-->
-			<a href="/pizzas/create" class="btn btn-info text-white">Aggiungi pizza</a>
-			
+			<a href="/pizzas/create" class="btn btn-info text-white" sec:authorize="hasAuthority('ADMIN')">Aggiungi
+				pizza</a>
+
 			<!-- ingredients page -->
-				<a href="/ingredients" class="btn btn-success text-white mt-4">Pagina degli ingredienti</a>
+			<a href="/ingredients" class="btn btn-success text-white mt-4" sec:authorize="hasAuthority('ADMIN')">Pagina
+				degli ingredienti</a>
 		</div>
 
 		<h3>Le nostre pizze:</h3>
