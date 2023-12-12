@@ -19,8 +19,8 @@ public class AuthConf {
 		http.authorizeHttpRequests()
 			.requestMatchers("/pizzas/create/**").hasAnyAuthority("ADMIN", "GOD")	//crete
 			.requestMatchers("/pizzas/edit/**").hasAnyAuthority("ADMIN", "GOD") //edit
-			.requestMatchers("/**")
-			.permitAll().and().formLogin()
+			.requestMatchers("/**").permitAll()
+			.and().formLogin()
 			.and().logout();
 
 		return http.build();
