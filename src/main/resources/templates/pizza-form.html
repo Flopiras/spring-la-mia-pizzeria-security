@@ -11,6 +11,9 @@
 </head>
 <div class="container">
 
+	<!--home button-->
+	<a href="/" class="btn btn-secondary text-white mt-4">Torna alla Home</a>
+
 	<h1 class="text-center my-4">Creazione nuova pizza</h1>
 
 	<form th:object="${pizza}" method="POST">
@@ -43,18 +46,12 @@
 
 		<!--Ingredients-->
 		<p>Ingredienti:</p>
-		<div class="form-check form-check-inline"
-			 th:each="ingredient : ${ingredients}"
-			 th:object="${ingredient}">
-			 
-			<input class="form-check-input" 
-				   type="checkbox" 
-				   th:id="${'ingredient-' + ingredient.id}" 
-				   th:value="*{id}"
-				   th:field="${pizza.ingredients}">
-			<label class="form-check-label" 
-				   for="${'ingredient-' + ingredient.id}">
-				   [[*{title}]]
+		<div class="form-check form-check-inline" th:each="ingredient : ${ingredients}" th:object="${ingredient}">
+
+			<input class="form-check-input" type="checkbox" th:id="${'ingredient-' + ingredient.id}" th:value="*{id}"
+				th:field="${pizza.ingredients}">
+			<label class="form-check-label" for="${'ingredient-' + ingredient.id}">
+				[[*{title}]]
 			</label>
 		</div>
 
